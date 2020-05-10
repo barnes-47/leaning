@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using WebApi.Business.Contracts;
 using WebApi.Infrastructure.DataAccess;
-using WebApi.Infrastructure.DataAccess.Base;
 using WebApi.Infrastructure.Db.Context;
 using WebApi.Infrastructure.Dto;
 
@@ -29,7 +28,7 @@ namespace WebApi.Business.Concretes
             var user = _uow.GetRepository<User>().Get(id);
             if (user == null)
                 return;
-            
+
             _uow.GetRepository<User>().Delete(user);
             _uow.Context.SaveChanges();
         }
@@ -46,7 +45,7 @@ namespace WebApi.Business.Concretes
             // before updating the record.
 
             _uow.GetRepository<User>().Update(user);
-            _uow.SaveChanges();
+            _uow.Commit();
         }
     }
 }

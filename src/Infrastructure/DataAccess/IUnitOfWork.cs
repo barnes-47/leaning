@@ -4,15 +4,12 @@ using WebApi.Infrastructure.Db.Context;
 
 namespace WebApi.Infrastructure.DataAccess
 {
-    public interface IUnitOfWork : IDisposable
-    {
-        IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
-        int SaveChanges();
-    }
-
-    public interface IUnitOfWork<TContext> : IUnitOfWork
+    public interface IUnitOfWork<TContext> : IDisposable
         where TContext : ApplicationContext
     {
         TContext Context { get; }
+        int Commit();
+        object GetRepository(Type typeOfIRepository);
+        IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
     }
 }

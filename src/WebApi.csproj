@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Business\Models\" />
-    <Folder Include="Infrastructure\DataAccess\Concretes\" />
-    <Folder Include="Infrastructure\DataAccess\Contracts\" />
   </ItemGroup>
 
   <ItemGroup>

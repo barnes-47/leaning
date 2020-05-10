@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using WebApi.Business.Concretes;
 using WebApi.Business.Contracts;
 using WebApi.Infrastructure.DataAccess;
 using WebApi.Infrastructure.DataAccess.Base;
+using WebApi.Infrastructure.DataAccess.Concretes;
+using WebApi.Infrastructure.DataAccess.Contracts;
 using WebApi.Infrastructure.Db.Context;
 using WebApi.Infrastructure.Dto;
 
@@ -29,7 +32,8 @@ namespace WebApi
                     optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=ApplicationDb;Trusted_Connection=True;");
                 });
 
-            services.AddScoped(typeof(IRepository<User>), typeof(Repository<User>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork<ApplicationContext>, UnitOfWork<ApplicationContext>>();
             services.AddScoped<IUserBusiness, UserBusiness>();
         }

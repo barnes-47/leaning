@@ -9,7 +9,7 @@ namespace WebApi.Infrastructure.DataAccess.Base
     internal class Repository<TEntity> : IRepository<TEntity>
         where TEntity : Entity
     {
-        private readonly IUnitOfWork<ApplicationContext> _uow;
+        protected readonly IUnitOfWork<ApplicationContext> _uow;
 
         public Repository(IUnitOfWork<ApplicationContext> uow)
         {

@@ -19,11 +19,12 @@ namespace WebApi.Infrastructure.DataAccess
             _serviceProvider = serviceProvider;
         }
 
+        public int Commit() => Context.SaveChanges();
         public void Dispose() => Context.Dispose();
-
-        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity
+        public object GetRepository(Type typeOfIRepository)
+            => _serviceProvider.GetService(typeOfIRepository);
+        public IRepository<TEntity> GetRepository<TEntity>()
+            where TEntity : Entity
             => (IRepository<TEntity>)_serviceProvider.GetService(typeof(IRepository<TEntity>));
-
-        public int SaveChanges() => Context.SaveChanges();
     }
 }
